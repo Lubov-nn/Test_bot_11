@@ -1,9 +1,14 @@
 import telebot
 from telebot import types
+from pprint import pprint
 
 file_name = "C:\Python_project\Creds\Key_My_love_11.txt"
 
 with open(file_name) as f:
+    print(f)
+
+    pprint(vars(f))
+
     bot_key = f.read()
 
 botTimeWeb = telebot.TeleBot(bot_key)
@@ -11,7 +16,9 @@ botTimeWeb = telebot.TeleBot(bot_key)
 if __name__ == '__main__':
     print("START")
 
-
+    @botTimeWeb.message_handler()
+    def print_msg(message):
+        print(message)
     @botTimeWeb.message_handler(commands=['start'])
     def startBot(message):
         first_mess = f"<b>{message.from_user.first_name} {message.from_user.last_name}</b>, привет!\nХочешь расскажу немного о нашей компании?"
